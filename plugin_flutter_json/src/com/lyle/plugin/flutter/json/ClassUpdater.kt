@@ -6,7 +6,7 @@ import org.apache.commons.httpclient.NameValuePair
 import java.lang.IllegalStateException
 import java.util.HashMap
 
-class ClassGenerator {
+class ClassUpdater {
     val classes = mutableMapOf<String, List<Param>>()
 
     fun generate(name: String, jsonText: String): String {
@@ -39,8 +39,8 @@ class ClassGenerator {
                 .filter { it.key == "String" || it.key == "int" || it.key == "double" || it.key == "bool" || it.key == "num" }
                 .sortedBy { it.key }
                 .map {
-                    sb.append("$spaceStr${it.key} ${it.camelWord};\n")
-                    NameValuePair(it.value, it.camelWord)
+                    sb.append("$spaceStr${it.key} ${it.value};\n")
+                    it.value
                 }
 
         val objectList = params
@@ -50,16 +50,16 @@ class ClassGenerator {
                     val clazzName = Utils.toUpperCaseFirstOne(it.value + "Bean")
                     classes[clazzName] = it.clazz
                     tempClasses[clazzName] = it.clazz
-                    sb.append(spaceStr).append(clazzName).append(" ").append(it.camelWord).append(";").append("\n")
-                    NamePair(it.camelWord, clazzName, it.value)
+                    sb.append(spaceStr).append(clazzName).append(" ").append(it.value).append(";").append("\n")
+                    NameValuePair(clazzName, it.value)
                 }
 
         val listBaseList = params
                 .filter { it.key.startsWith("List<") }
                 .sortedBy { it.value }
                 .map {
-                    sb.append(spaceStr).append(it.key).append(" ").append(it.camelWord).append(";").append("\n")
-                    NamePair(it.camelWord, it.key, it.value)
+                    sb.append(spaceStr).append(it.key).append(" ").append(it.value).append(";").append("\n")
+                    NameValuePair(it.key, it.value)
                 }
 
         val listList = params
@@ -69,8 +69,8 @@ class ClassGenerator {
                     val clazzName = Utils.toUpperCaseFirstOne(it.value + "ListBean")
                     classes[clazzName] = it.clazz
                     tempClasses[clazzName] = it.clazz
-                    sb.append(spaceStr).append("List<").append(clazzName).append(">").append(" ").append(it.camelWord).append(";").append("\n")
-                    NamePair(it.camelWord, clazzName, it.value)
+                    sb.append(spaceStr).append("List<").append(clazzName).append(">").append(" ").append(it.value).append(";").append("\n")
+                    NameValuePair(clazzName, it.value)
                 }
 
         val tempSpaceStr = "$spaceStr  "
@@ -83,22 +83,22 @@ class ClassGenerator {
                 .append(className).append("({")
 
         orderedList.forEach {
-            sb.append("this").append(".").append(it.value)
+            sb.append("this").append(".").append(it)
             sb.append(", ")
         }
 
         objectList.forEach {
-            sb.append("this").append(".").append(it.camelKey)
+            sb.append("this").append(".").append(it.value)
             sb.append(", ")
         }
 
         listList.forEach {
-            sb.append("this").append(".").append(it.camelKey)
+            sb.append("this").append(".").append(it.value)
             sb.append(", ")
         }
 
         listBaseList.forEach {
-            sb.append("this").append(".").append(it.camelKey)
+            sb.append("this").append(".").append(it.value)
             sb.append(", ")
         }
         if (sb.endsWith(", ")) {
@@ -112,30 +112,30 @@ class ClassGenerator {
                 .append(tempSpaceStr)
 
         orderedList.forEach {
-            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.value).append(" = ").append("json['").append(it.name).append("'];")
+            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it).append(" = ").append("json['").append(it).append("'];")
         }
 
         objectList.forEach {
-            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.camelKey).append(" = ").append(it.key).append(".fromJson(json['").append(it.value).append("']);")
+            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.value).append(" = ").append(it.name).append(".fromJson(json['").append(it.value).append("']);")
         }
 
         listList.forEach {
-            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.camelKey).append(" = ").append("(json['").append(it.value).append("'] as List)!=null?(json['").append(it.value).append("'] as List).map((i) => ").append(it.key).append(".fromJson(i)).toList():null;")
+            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.value).append(" = ").append("(json['").append(it.value).append("'] as List)!=null?(json['").append(it.value).append("'] as List).map((i) => ").append(it.name).append(".fromJson(i)).toList():null;")
         }
 
         listBaseList.forEach {
             sb.append("\n")
-            sb.append("\n").append(tempSpaceStr).append("List<dynamic> ").append(it.camelKey).append("List").append(" = json['").append(it.value).append("'];")
-            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.camelKey).append(" = new List();")
+            sb.append("\n").append(tempSpaceStr).append("List<dynamic> ").append(it.value).append("List").append(" = json['").append(it.value).append("'];")
+            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.value).append(" = new List();")
 
             var function = "o.toString()"
-            when (it.key) {
+            when (it.name) {
                 "List<int>" -> function = "int.parse(o.toString())"
                 "List<double>" -> function = "double.parse(o.toString())"
                 "List<bool>" -> function = "o.toString() == 'true'"
             }
 
-            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.camelKey).append(".addAll(").append(it.camelKey).append("List").append(".map((o) => ").append(function).append("));")
+            sb.append("\n").append(tempSpaceStr).append("this").append(".").append(it.value).append(".addAll(").append(it.value).append("List").append(".map((o) => ").append(function).append("));")
         }
 
         sb.append("\n").append(spaceStr).append("}\n\n")
@@ -143,19 +143,19 @@ class ClassGenerator {
         sb.append(spaceStr)
                 .append("Map<String, dynamic> toJson() {\n").append(tempSpaceStr).append("final Map<String, dynamic> data = new Map<String, dynamic>();")
         orderedList.forEach {
-            sb.append("\n").append(tempSpaceStr).append("data['").append(it.name).append("'] = ").append("this").append(".").append(it.value).append(";")
+            sb.append("\n").append(tempSpaceStr).append("data['").append(it).append("'] = ").append("this").append(".").append(it).append(";")
         }
 
         objectList.forEach {
-            sb.append("\n").append(tempSpaceStr).append("data['").append(it.value).append("'] = ").append("this").append(".").append(it.camelKey).append(".toJson();")
+            sb.append("\n").append(tempSpaceStr).append("data['").append(it.value).append("'] = ").append("this").append(".").append(it.value).append(".toJson();")
         }
 
         listList.forEach {
-            sb.append("\n").append(tempSpaceStr).append("data['").append(it.value).append("'] = ").append("this").append(".").append(it.camelKey).append(" != null?this.").append(it.camelKey).append(".map((i) => i.toJson()).toList():null;")
+            sb.append("\n").append(tempSpaceStr).append("data['").append(it.value).append("'] = ").append("this").append(".").append(it.value).append(" != null?this.").append(it.value).append(".map((i) => i.toJson()).toList():null;")
         }
 
         listBaseList.forEach {
-            sb.append("\n").append(tempSpaceStr).append("data['").append(it.value).append("'] = ").append("this").append(".").append(it.camelKey).append(";")
+            sb.append("\n").append(tempSpaceStr).append("data['").append(it.value).append("'] = ").append("this").append(".").append(it.value).append(";")
         }
 
         sb.append("\n").append(tempSpaceStr).append("return data;\n")

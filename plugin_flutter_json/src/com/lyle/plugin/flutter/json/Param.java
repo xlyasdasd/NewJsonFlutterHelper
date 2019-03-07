@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Param {
     String key;
     String value;
+    String camelWord;
     List<Param> clazz;
 
     /**
@@ -106,6 +107,7 @@ public class Param {
     public Param(String key, String value, List<Param> clazz) {
         this.key = key;
         this.value = value;
+        this.camelWord = Utils.toUpperCaseParams(value);
         this.clazz = clazz;
     }
 
