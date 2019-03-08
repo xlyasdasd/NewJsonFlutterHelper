@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39e80943-f0c5-4cf2-b28a-30492cd3cba5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassUpdater.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/NamePair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin_flutter_json/plugin_flutter_json.jar" beforeDir="false" afterPath="$PROJECT_DIR$/plugin_flutter_json/plugin_flutter_json.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassGenerator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/Param.java" beforeDir="false" afterPath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/Param.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/Utils.java" afterDir="false" />
-    </list>
+    <list default="true" id="39e80943-f0c5-4cf2-b28a-30492cd3cba5" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,15 +12,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="modules.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugin_flutter_json/.idea/modules.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="misc.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugin_flutter_json/.idea/misc.xml">
           <provider selected="true" editor-type-id="text-editor">
@@ -38,14 +21,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClassGenerator.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClassGenerator.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassGenerator.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="586">
-              <caret line="72" column="52" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
+            <state relative-caret-position="233">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="e#38#228#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plugin_flutter_json/resources/META-INF/plugin.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -180,7 +172,6 @@
         <option value="$PROJECT_DIR$/plugin_flutter_json/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/.idea/modules.xml" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/plugin_flutter_json/resources/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassUpdater.kt" />
         <option value="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/FlutterToJsonAction.java" />
         <option value="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/FlutterToJsonAction.java" />
@@ -191,6 +182,7 @@
         <option value="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/Utils.java" />
         <option value="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassGenerator.kt" />
         <option value="$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassGenerator.kt" />
+        <option value="$PROJECT_DIR$/plugin_flutter_json/resources/META-INF/plugin.xml" />
       </list>
     </option>
   </component>
@@ -419,19 +411,18 @@
       <workItem from="1550049149717" duration="1291000" />
       <workItem from="1551937583155" duration="668000" />
       <workItem from="1551946312849" duration="1067000" />
-      <workItem from="1551948342758" duration="5978000" />
+      <workItem from="1551948342758" duration="6290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24482000" />
+    <option name="totallyTimeSpent" value="24794000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="826" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50572246" side_tool="true" visible="true" weight="0.32831737" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50143063" side_tool="true" visible="true" weight="0.32968536" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Flutter Outline" order="3" />
@@ -450,8 +441,8 @@
       <window_info anchor="bottom" id="Flutter Performance" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49861112" weight="0.32900944" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49928468" weight="0.32968536" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.4985694" visible="true" weight="0.32968536" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Flutter Inspector" order="3" />
@@ -701,13 +692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin_flutter_json/resources/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugin_flutter_json/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-257">
@@ -800,11 +784,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/plugin_flutter_json/src/com/lyle/plugin/flutter/json/ClassGenerator.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="72" column="52" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
+        <state relative-caret-position="233">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="e#38#228#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin_flutter_json/resources/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
         </state>
       </provider>
     </entry>
