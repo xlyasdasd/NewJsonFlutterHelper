@@ -1,18 +1,37 @@
 package com.lyle.plugin.flutter.json
 
+import com.google.gson.JsonObject
 import com.google.gson.JsonParseException
 import com.google.gson.JsonParser
 import org.apache.commons.httpclient.NameValuePair
 import java.lang.IllegalStateException
-import java.util.HashMap
+import java.util.*
 
 class ClassGenerator {
     val classes = mutableMapOf<String, List<Param>>()
 
     fun generate(name: String, jsonText: String): String {
         return try {
+
             val fields = Param.json2Params(JsonParser().parse(jsonText).asJsonObject)
             "class $name {\n${printClassWithParams(fields, 2, name)}\n}\n${buildClasses()}"
+        } catch (jsonParseException: JsonParseException) {
+            jsonParseException.printStackTrace()
+            "error: not supported json"
+        } catch (illegalStateException: IllegalStateException) {
+            illegalStateException.printStackTrace()
+
+            if (illegalStateException.message?.startsWith("Not a JSON Object") == true) {
+                "error: not supported json"
+            } else {
+                "error: unknown"
+            }
+        }
+    }
+
+    fun generate(name: String, fields: JsonObject): String {
+        return try {
+            "class $name {\n${printClassWithParams(Param.json2Params(fields), 2, name)}\n}\n${buildClasses()}"
         } catch (jsonParseException: JsonParseException) {
             jsonParseException.printStackTrace()
             "error: not supported json"

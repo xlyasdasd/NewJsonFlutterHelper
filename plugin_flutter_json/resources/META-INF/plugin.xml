@@ -33,7 +33,11 @@
         <add-to-group group-id="GenerateGroup" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="meta N"/>
     </action>
+    <action id="GenerateCodeAction" class="com.lyle.plugin.flutter.json.GenerateCodeAction" text="generateParams">      <add-to-group group-id="WindowMenu" anchor="first"/>
 
+      <add-to-group group-id="GenerateGroup" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="meta M"/>
+    </action>
   </actions>
 
 </idea-plugin>
