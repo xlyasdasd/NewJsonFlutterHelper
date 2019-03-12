@@ -52,16 +52,16 @@ public class GenerateCodeAction extends AnAction {
         Document document = editor.getDocument();
         parseClassName(document.getText());
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("d",);
-        String classesString = new ClassGenerator().generate(Utils.toUpperCaseFirstOne(virtualFile.getNameWithoutExtension()), )
-        Utils.writeToFile(virtualFile, classesString)
-        ClassGenerator.
-        CaretModel caretModel = editor.getCaretModel();
+//        jsonObject.addProperty("d",);
+//        String classesString = new ClassGenerator().generate(Utils.toUpperCaseFirstOne(virtualFile.getNameWithoutExtension()), )
+//        Utils.writeToFile(virtualFile, classesString)
+//        ClassGenerator.
+//        CaretModel caretModel = editor.getCaretModel();
+//
+//        caretModel.getVisualLineEnd();
 
-        caretModel.getVisualLineEnd();
 
-
-        showInfoDialog(String.valueOf(document.isLineModified(caretModel.getVisualPosition().line)));
+//        showInfoDialog(String.valueOf(document.isLineModified(caretModel.getVisualPosition().line)));
 //        WriteCommandAction.runWriteCommandAction(project, () -> {
 //            document.insertString(caretModel.getOffset(), ANNOTATION);
 //            document.insertString(0, LIBRARY_IMPORT + JSON_PACKAGE_IMPORT
