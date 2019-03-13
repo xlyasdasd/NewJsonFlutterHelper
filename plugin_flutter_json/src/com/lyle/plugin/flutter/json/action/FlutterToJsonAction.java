@@ -1,4 +1,4 @@
-package com.lyle.plugin.flutter.json;
+package com.lyle.plugin.flutter.json.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -8,10 +8,17 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.lyle.plugin.flutter.json.FrameView;
+import com.lyle.plugin.flutter.json.view.OnClickListener;
+import com.lyle.plugin.flutter.json.view.WritablePannel;
 
 import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class FlutterToJsonAction extends AnAction {
+public class FlutterToJsonAction extends AnAction implements OnClickListener {
+    WritablePannel writablePannel;
+    private VirtualFile virtualFile;
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
@@ -27,14 +34,16 @@ public class FlutterToJsonAction extends AnAction {
         if (psiFile == null) {
             return;
         }
-        VirtualFile virtualFile = psiFile.getVirtualFile();
-        FrameView frameView = new FrameView(virtualFile);
-        JFrame jFrame = new JFrame("format json to dart model");
-        frameView.setFrame(jFrame);
-        jFrame.setSize(700, 470);
-        jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        jFrame.setVisible(true);
-        jFrame.add(frameView.build());
+        writablePannel = WritablePannel.builder(this);
+        virtualFile = psiFile.getVirtualFile();
+        writablePannel.setVisible(true);
+    }
+
+    @Override
+    public void onViewClick(String json) {
+        if (json != null) {
+            writablePannel.dispose();
+        }
     }
 }
 

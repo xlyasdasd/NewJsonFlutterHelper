@@ -1,4 +1,4 @@
-package com.lyle.plugin.flutter.json;
+package com.lyle.plugin.flutter.json.action;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -15,8 +15,11 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.*;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilBase;
+import com.lyle.plugin.flutter.json.FrameView;
+import com.lyle.plugin.flutter.json.view.OnClickListener;
 import jdk.nashorn.internal.parser.JSONParser;
 
 import javax.swing.*;
@@ -26,7 +29,7 @@ import java.util.regex.Pattern;
 
 import static org.apache.xmlbeans.impl.jam.xml.JamXmlElements.ANNOTATION;
 
-public class GenerateCodeAction extends AnAction {
+public class GenerateCodeAction extends AnAction implements OnClickListener {
 
     private CaretModel mCaret;
 
@@ -49,27 +52,56 @@ public class GenerateCodeAction extends AnAction {
         TreeClassChooserFactory classChooserFactory = new TreeClassChooserFactoryImpl(project);
         VirtualFile virtualFile = psiFile.getVirtualFile();
         FrameView frameView = new FrameView(virtualFile);
+
         Document document = editor.getDocument();
+
+
         parseClassName(document.getText());
-        JsonObject jsonObject = new JsonObject();
-//        jsonObject.addProperty("d",);
-//        String classesString = new ClassGenerator().generate(Utils.toUpperCaseFirstOne(virtualFile.getNameWithoutExtension()), )
-//        Utils.writeToFile(virtualFile, classesString)
-//        ClassGenerator.
-//        CaretModel caretModel = editor.getCaretModel();
+
+        CaretModel caretModel = editor.getCaretModel();
+        try {
+            int startPosition = caretModel.getOffset();
+            int classStartPosition = -1;
+            while (true) {
+                PsiElement element = psiFile.getViewProvider().findElementAt(startPosition);
+                if ("{".equals(element.getText().trim())) {
+                    classStartPosition = startPosition;
+                    break;
+                }
+                startPosition--;
+            }
+
+            if (classStartPosition == -1) {//没有找到开始的{
+                return;
+            }
+            while (true) {
+                PsiElement element = psiFile.getViewProvider().findElementAt(classStartPosition);
+                if ("{".equals(element.getText().trim())) {
+                    classStartPosition = startPosition;
+                    break;
+                }
+                startPosition--;
+            }
+        } catch (Exception e) {
+
+        }
+
+//        showInfoDialog(psiFile.getViewProvider().findElementAt(caretModel.getOffset()).isEquivalentTo(
 //
-//        caretModel.getVisualLineEnd();
+//        );
+
+//        PsiType psiType  =  getTargetClass(editor,psiFile).getAllFields()[0].getType();
+////        getTargetClass(editor,psiFile).getAllFields()[0].getType().get()
+//        String paramsString = ParamGenerator.from(getTargetClass(editor,psiFile));
 
 
-//        showInfoDialog(String.valueOf(document.isLineModified(caretModel.getVisualPosition().line)));
-//        WriteCommandAction.runWriteCommandAction(project, () -> {
-//            document.insertString(caretModel.getOffset(), ANNOTATION);
-//            document.insertString(0, LIBRARY_IMPORT + JSON_PACKAGE_IMPORT
-//                    + PART_IMPORT);
-//        });
+        WriteCommandAction.runWriteCommandAction(project, () -> {
+            document.insertString(caretModel.getOffset(), "sdsdsdsd");
 
+        });
 
-
+//        StringBuilder sdsdsdsd = new StringBuilder();
+//        sdsdsdsd
 //        JFrame jFrame = new JFrame("format json to dart model");
 //        frameView.setFrame(jFrame);
 //        jFrame.setSize(700, 470);
@@ -77,6 +109,20 @@ public class GenerateCodeAction extends AnAction {
 //        jFrame.setVisible(true);
 //        jFrame.add(frameView.build());
     }
+
+
+    private PsiClass getTargetClass(Editor editor, PsiFile file) {
+        int offset = editor.getCaretModel().getOffset();
+        PsiElement element = file.findElementAt(offset);
+        if (element == null) {
+            return null;
+        } else {
+            PsiClass target = PsiTreeUtil.getParentOfType(element, PsiClass.class);
+            return target instanceof SyntheticElement ? null : target;
+        }
+    }
+
+
     private String parseClassName(String fileContent) {
         if (fileContent == null || fileContent.equals("")) {
             return "";
@@ -90,8 +136,16 @@ public class GenerateCodeAction extends AnAction {
         }
         return "";
     }
+
     private void showInfoDialog(String message) {
         Messages.showErrorDialog(message, "Info");
+    }
+
+    @Override
+    public void onViewClick(String json) {
+        if (json!=null){
+
+        }
     }
 }
 
