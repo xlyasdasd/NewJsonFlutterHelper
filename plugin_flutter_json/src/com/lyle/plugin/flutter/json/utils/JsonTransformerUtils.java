@@ -61,15 +61,13 @@ public class JsonTransformerUtils {
             JsonPrimitive jsonPrimitive = entry.getValue().getAsJsonPrimitive();
             paramsModel.setType(getPrimitiveType(jsonPrimitive));
             paramsModel.setTypeName(getPrimitiveTypeName(jsonPrimitive, ParamsConfig.NUMString));
-            return paramsModel;
         } else if (entry.getValue().isJsonArray()) {
             JsonArray jsonElements = entry.getValue().getAsJsonArray();
             if (jsonElements.get(0).isJsonPrimitive()) {//普通数据数组
                 paramsModel.setType(ParamsConfig.LIST);
                 paramsModel.setTypeName(getPrimitiveTypeName(jsonElements.get(0).getAsJsonPrimitive(), ParamsConfig.LISTString));
-                paramsModel.setTypeName(String.format(ParamsConfig.LISTString, paramsModel.getCamelKey()));
             } else if (jsonElements.get(0).isJsonObject()) {//object list
-                String className = Character.toUpperCase(entry.getKey().charAt(0)) + entry.getKey().substring(1) + "ListBean";
+                String className = Character.toUpperCase(entry.getKey().charAt(0)) + entry.getKey().substring(1) + "Bean";
                 paramsModel.setType(ParamsConfig.LISTOBJECT);
                 paramsModel.setTypeName(String.format(ParamsConfig.LISTString, className));
                 binaryClassList(classModels, jsonElements.get(0).getAsJsonObject().entrySet(), className);
@@ -80,7 +78,7 @@ public class JsonTransformerUtils {
             paramsModel.setTypeName(className);
             binaryClassList(classModels, entry.getValue().getAsJsonObject().entrySet(), className);//类名大写
         }
-        return null;
+        return paramsModel;
     }
 
     private static String getPrimitiveTypeName(JsonPrimitive jsonPrimitive, String modelType) {
