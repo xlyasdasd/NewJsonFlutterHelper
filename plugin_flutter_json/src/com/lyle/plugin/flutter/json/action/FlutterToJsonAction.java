@@ -8,8 +8,14 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.lyle.plugin.flutter.json.utils.ClassProcessor;
+import com.lyle.plugin.flutter.json.utils.JsonTransformerUtils;
+import com.lyle.plugin.flutter.json.utils.StringUtils;
 import com.lyle.plugin.flutter.json.view.writablepannel.OnClickListener;
 import com.lyle.plugin.flutter.json.view.writablepannel.WritablePannel;
+
+import static com.lyle.plugin.flutter.json.utils.StringUtils.toUpperCaseFirstOne;
+import static com.lyle.plugin.flutter.json.utils.StringUtils.toUpperCaseParams;
 
 public class FlutterToJsonAction extends AnAction implements OnClickListener {
     WritablePannel writablePannel;
@@ -37,6 +43,7 @@ public class FlutterToJsonAction extends AnAction implements OnClickListener {
     @Override
     public void onViewClick(String json) {
         if (json != null) {
+            ClassProcessor.buildClass(JsonTransformerUtils.transformerJson(json, toUpperCaseFirstOne(toUpperCaseParams(virtualFile.getName()))));
             writablePannel.dispose();
         }
     }
