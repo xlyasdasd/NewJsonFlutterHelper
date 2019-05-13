@@ -49,7 +49,11 @@ public class FlutterToJsonAction extends AnAction implements OnClickListener {
         if (json != null) {
 
             writablePannel.dispose();
-            writeClass(ClassProcessor.buildClass(JsonTransformerUtils.transformerJson(json, toUpperCaseFirstOne(toUpperCaseParams(virtualFile.getName())))));
+            try {
+                virtualFile.setBinaryContent(ClassProcessor.buildClass(JsonTransformerUtils.transformerJson(json, toUpperCaseFirstOne(toUpperCaseParams(virtualFile.getNameWithoutExtension())))).getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             showInfoDialog("json error!");
         }
