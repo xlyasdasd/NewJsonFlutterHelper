@@ -61,7 +61,6 @@ public class JsonTransformerUtils {
             JsonPrimitive jsonPrimitive = entry.getValue().getAsJsonPrimitive();
             paramsModel.setType(getPrimitiveType(jsonPrimitive));
             paramsModel.setTypeName(getPrimitiveTypeName(jsonPrimitive, ParamsConfig.NUMString));
-            return paramsModel;
         } else if (entry.getValue().isJsonArray()) {
             JsonArray jsonElements = entry.getValue().getAsJsonArray();
             if (jsonElements.get(0).isJsonPrimitive()) {//普通数据数组
@@ -80,7 +79,7 @@ public class JsonTransformerUtils {
             paramsModel.setTypeName(className);
             binaryClassList(classModels, entry.getValue().getAsJsonObject().entrySet(), className);//类名大写
         }
-        return null;
+        return paramsModel;
     }
 
     private static String getPrimitiveTypeName(JsonPrimitive jsonPrimitive, String modelType) {

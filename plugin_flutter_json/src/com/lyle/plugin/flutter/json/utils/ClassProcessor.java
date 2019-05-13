@@ -8,7 +8,12 @@ import java.util.List;
 
 
 public class ClassProcessor {
-
+    /**
+     * build class string
+     *
+     * @param classModels Class实体类List
+     * @return class string
+     */
     public static String buildClass(List<ClassModel> classModels) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < classModels.size(); i++) {
@@ -77,5 +82,5 @@ public class ClassProcessor {
     private static String classTitle(ClassModel classModel) {
         return String.format(ClassCommand.CLASS_TITLE, classModel.getClassName());
     }
-    
+
 }
