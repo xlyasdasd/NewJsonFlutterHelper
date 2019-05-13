@@ -4,6 +4,7 @@ import com.lyle.plugin.flutter.json.model.ClassModel;
 import com.lyle.plugin.flutter.json.model.ParamsConfig;
 import com.lyle.plugin.flutter.json.model.ParamsModel;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -15,6 +16,7 @@ public class ClassProcessor {
      * @return class string
      */
     public static String buildClass(List<ClassModel> classModels) {
+        Collections.reverse(classModels);
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < classModels.size(); i++) {
             buildClassParam(stringBuilder, classModels.get(i));
@@ -28,21 +30,21 @@ public class ClassProcessor {
             stringBuilder.append(buildParams(paramsModel));
         }
         stringBuilder.append(ClassCommand.ENTER);//额外换行
-        stringBuilder.append(ClassCommand.CONSTRUCT_FRONT);
+        stringBuilder.append(String.format(ClassCommand.CONSTRUCT_FRONT, classModel.getClassName()));
         for (ParamsModel paramsModel : classModel.getParamsModels()) {
             stringBuilder.append(String.format(ClassCommand.CONSTRUCT_PARAMS, paramsModel.getCamelKey()));
         }
-        stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+        stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
         stringBuilder.append(ClassCommand.CONSTRUCT_END);
         stringBuilder.append(ClassCommand.ENTER);//额外换行
-        stringBuilder.append(ClassCommand.FROM_JSON_FRONT);
+        stringBuilder.append(String.format(ClassCommand.FROM_JSON_FRONT, classModel.getClassName()));
         for (ParamsModel paramsModel : classModel.getParamsModels()) {
             if (paramsModel.getType() == ParamsConfig.LISTOBJECT) {//list object
                 stringBuilder.append(String.format(ClassCommand.FROM_JSON_LIST_OBJECT_JSON_INPUT, paramsModel.getCamelKey(), paramsModel.getName(), paramsModel.getName(), StringUtils.toUpperCaseFirstOne(paramsModel.getCamelKey() + "Bean")));
                 continue;
             }
             if (paramsModel.getType() == ParamsConfig.LIST) {//list pri
-                stringBuilder.append(String.format(ClassCommand.FROM_JSON_LIST_PRI_JSON_INPUT, paramsModel.getCamelKey(), paramsModel.getName(), paramsModel.getTypeName()));
+                stringBuilder.append(String.format(ClassCommand.FROM_JSON_LIST_PRI_JSON_INPUT, paramsModel.getCamelKey(), paramsModel.getName(), paramsModel.getTypeName().replace("List<", "").replace(">", "")));
                 continue;
             }
             if (paramsModel.getType() == ParamsConfig.OBJECT) {//obj
@@ -60,7 +62,7 @@ public class ClassProcessor {
                 continue;
             }
             if (paramsModel.getType() == ParamsConfig.LIST) {//list pri
-                stringBuilder.append(String.format(ClassCommand.FROM_JSON_LIST_PRI_JSON_INPUT, paramsModel.getCamelKey(), paramsModel.getName(), paramsModel.getTypeName()));
+                stringBuilder.append(String.format(ClassCommand.TO_JSON_LIST_PRI_JSON_INPUT, paramsModel.getName(), paramsModel.getCamelKey()));
                 continue;
             }
             if (paramsModel.getType() == ParamsConfig.OBJECT) {//obj
