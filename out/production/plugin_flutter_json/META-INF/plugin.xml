@@ -5,10 +5,10 @@
   <vendor email="527395880@qq.com" url="https://github.com/xlyasdasd/FlutterJsonHelper">Lyle</vendor>
 
   <description><![CDATA[
-   <a href="https://github.com/xlyasdasd/FlutterJsonHelper/blob/master/image/guide.gif">操作演示：</a><br>
+      the most helpful plugin to transform json to flutter / dart file.
+      <br>
       <img src="https://github.com/xlyasdasd/FlutterJsonHelper/blob/master/image/guide.gif">
       <br>
-      the most helpful plugin to transform json to flutter / dart file.
     ]]></description>
 
   <change-notes><![CDATA[
@@ -31,12 +31,12 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="FlutterToJsonAction" class="com.lyle.plugin.flutter.json.FlutterToJsonAction" text="JsonToDartClass">      <add-to-group group-id="WindowMenu" anchor="first"/>
+    <action id="FlutterToJsonAction" class="com.lyle.plugin.flutter.json.action.FlutterToJsonAction" text="JsonToDartClass">      <add-to-group group-id="WindowMenu" anchor="first"/>
 
         <add-to-group group-id="GenerateGroup" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="meta N"/>
     </action>
-    <action id="GenerateCodeAction" class="com.lyle.plugin.flutter.json.GenerateCodeAction" text="generateParams">      <add-to-group group-id="WindowMenu" anchor="first"/>
+    <action id="GenerateCodeAction" class="com.lyle.plugin.flutter.json.action.GenerateCodeAction" text="generateParams">      <add-to-group group-id="WindowMenu" anchor="first"/>
 
       <add-to-group group-id="GenerateGroup" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="meta M"/>

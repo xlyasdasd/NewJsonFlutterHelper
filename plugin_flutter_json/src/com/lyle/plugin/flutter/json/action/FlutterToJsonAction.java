@@ -8,13 +8,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.lyle.plugin.flutter.json.FrameView;
-import com.lyle.plugin.flutter.json.view.OnClickListener;
-import com.lyle.plugin.flutter.json.view.WritablePannel;
-
-import javax.swing.JFrame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import com.lyle.plugin.flutter.json.view.writablepannel.OnClickListener;
+import com.lyle.plugin.flutter.json.view.writablepannel.WritablePannel;
 
 public class FlutterToJsonAction extends AnAction implements OnClickListener {
     WritablePannel writablePannel;

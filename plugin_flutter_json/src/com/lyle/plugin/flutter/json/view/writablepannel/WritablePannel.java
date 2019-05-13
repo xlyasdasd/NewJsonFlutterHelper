@@ -1,4 +1,4 @@
-package com.lyle.plugin.flutter.json.view;
+package com.lyle.plugin.flutter.json.view.writablepannel;
 
 import com.intellij.ui.components.JBScrollPane;
 
